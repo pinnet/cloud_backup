@@ -59,8 +59,7 @@ function onRequest(client_req, client_res) {
     if( process.env.RCPATH != undefined ){
         //redirect
              client_res.writeHead(303, {  location: "https://google.com" });
-             res.pipe(client_res, {
-                end: true });
+             client_res.end();
     }
     else{
             client_res.writeHead(res.statusCode, res.headers)
