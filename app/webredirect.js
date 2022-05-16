@@ -35,26 +35,6 @@ process.stdin.on('data',function(data){
 http.createServer(onRequest).listen(8080);
 
 function onRequest(client_req, client_res) {
-   
-  var path     = client_req.url;
-  console.log(path.toString());
-
-  
-
-
-
-
-  client_req.headers.host = "localhost";
-  client_req.headers.authorization = auth;
-  var options = {
-    hostname: process.env.RCADDRESS,
-    port: process.env.RCPORT,
-    path: path,
-    method: client_req.method,
-    headers: client_req.headers
-  };
-
-  var proxy = http.request(options, function (res) {
 
     if( process.env.RCPATH != undefined ){
         //redirect
@@ -62,13 +42,30 @@ function onRequest(client_req, client_res) {
              client_res.end();
     }
     else{
-            client_res.writeHead(res.statusCode, res.headers)
-            res.pipe(client_res, {
-                end: true });
-    }
-  });
+        var path  = client_req.url;
+        console.log(path.toString());
 
-  client_req.pipe(proxy, {
-    end: true
-  });  
+        client_req.headers.host = "localhost";
+        client_req.headers.authorization = auth;
+        var options = {
+            hostname: process.env.RCADDRESS,
+            port: process.env.RCPORT,
+            path: path,
+            method: client_req.method,
+            headers: client_req.headers
+        };
+
+        var proxy = http.request(options, function (res) {
+
+            
+                    client_res.writeHead(res.statusCode, res.headers)
+                    res.pipe(client_res, {
+                        end: true });
+            }
+        );
+
+        client_req.pipe(proxy, {
+            end: true
+        });
+    }  
 }
