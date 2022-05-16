@@ -39,14 +39,18 @@ function onRequest(client_req, client_res) {
   var path     = client_req.url;
   console.log(path.toString());
 
+  if( process.env.RCPATH != undefined ){
+    //redirect
+    client_res.writeHead(301, {  });
+    client_res.end('Redirecting to ' + process.env.RCPATH);
+    return;
+    }
+
+
+
 
   client_req.headers.host = "localhost";
   client_req.headers.authorization = auth;
-  
-  if( process.env.RCPATH != undefined ){
-      path = encodeURIComponent(process.env.RCPATH);
-  }
-
   var options = {
     hostname: process.env.RCADDRESS,
     port: process.env.RCPORT,
