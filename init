@@ -35,4 +35,9 @@ echo "Starting Rclone ----------------------------------------------------------
 touch /run/stdout.log
 chown node:root /run/stdout.log
 
-rclone rcd --rc-web-gui --rc-addr ${RCADDRESS}:${RCPORT} --rc-user ${RCUSER} --rc-pass ${RCPASS} --log-file /run/rclone.log | node /home/node/app/webredirect.js &
+rclone rcd --rc-web-gui --rc-addr ${RCADDRESS}:${RCPORT} --rc-user ${RCUSER} --rc-pass ${RCPASS} --log-file /run/rclone.log | node /home/node/app/redirect.js &
+
+echo "Starting node server ---------------------------------------------------"
+
+cd /home/node/app/
+yarn run deploy
