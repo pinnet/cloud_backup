@@ -41,8 +41,8 @@ function onRequest(client_req, client_res) {
 
   if( process.env.RCPATH != undefined ){
     //redirect
-    client_res.writeHead(301, {  });
-    client_res.end('Redirecting to ' + process.env.RCPATH);
+    client_res.writeHead(303, {  location: "https://google.com" });
+    client_res.end();
     return;
     }
 
