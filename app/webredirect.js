@@ -42,7 +42,7 @@ function onRequest(client_req, client_res) {
   client_req.headers.authorization = auth;
   
   if( process.env.RCPATH != undefined ){
-      path = process.env.RCPATH;
+      path = encodeURIComponent(process.env.RCPATH);
   }
 
   var options = {
