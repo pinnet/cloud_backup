@@ -1,8 +1,11 @@
 var http = require('http');
 const { hostname } = require('os');
-var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
+
 var username = process.env.RCUSER;
 var password = process.env.RCPASS;
+var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
+
+
 var re = new RegExp('[a-zA-Z0-9\-\.]+\:[0-9]+\/', 'gi');
 
 process.stdin.on('data',function(data){
