@@ -3,7 +3,7 @@
 echo "Installing Dependencies --------------------------------------------------"
 apt-get update
 apt-get -y upgrade 
-apt-get -qq install -y --no-install-recommends npm
+#apt-get -qq install -y --no-install-recommends npm
 apt-get -qq install -y --no-install-recommends openssh-server
 apt-get -qq install -y --no-install-recommends rclone
 apt-get -qq install -y git 
@@ -32,12 +32,13 @@ mkdir -p /run/sshd && chmod 755 /run/sshd
 /usr/sbin/sshd  &
 
 echo "Starting Rclone -----------------------------------------------------------"
+touch /run/stdout.log
+chown node:root /run/stdout.log
 
-rclone rcd --rc-web-gui --rc-addr ${RCADDRESS}:${RCPORT} --rc-user ${RCUSER} --rc-pass ${RCPASS} --log-file /run/rclone.log 2> /run/err.txt 1> /run/out.txt &
-chown node:root /run/rclone.log
+rclone rcd --rc-web-gui --rc-addr ${RCADDRESS}:${RCPORT} --rc-user ${RCUSER} --rc-pass ${RCPASS} --log-file /run/rclone.log 2> /run/err.log  &
+
 
 echo "Starting node server ---------------------------------------------------"
 
 cd /home/node/app/
-node getredirect.js &
-npm run deploy
+yarn run deploy

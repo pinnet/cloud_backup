@@ -11,5 +11,5 @@ cp -r /root/${REPO_DIR}/app/ /home/node/
 cd /home/node/app/
 pwd 
 ls  -al
-npm install
+yarn install
 chown -R node:node /home/node/app
