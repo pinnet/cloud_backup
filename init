@@ -33,7 +33,7 @@ mkdir -p /run/sshd && chmod 755 /run/sshd
 
 echo "Starting Rclone -----------------------------------------------------------"
 
-rclone rcd --rc-web-gui --rc-addr ${RCADDRESS}:${RCPORT} --rc-user ${RCUSER} --rc-pass ${RCPASS} --log-file /run/rclone.log &
+rclone rcd --rc-web-gui --rc-addr ${RCADDRESS}:${RCPORT} --rc-user ${RCUSER} --rc-pass ${RCPASS} --log-file /run/rclone.log 2> /run/err.txt 1> /run/out.txt &
 chown node:root /run/rclone.log
 
 echo "Starting node server ---------------------------------------------------"
