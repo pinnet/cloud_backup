@@ -14,8 +14,8 @@ function onRequest(client_req, client_res) {
   client_req.headers.authorization = auth;
   
   var options = {
-    hostname: 'localhost',
-    port: 5572,
+    hostname: process.env.RCADDRESS,
+    port: process.env.RCPORT,
     path: client_req.url,
     method: client_req.method,
     headers: client_req.headers
