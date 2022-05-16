@@ -15,6 +15,13 @@ process.stdin.on('data',function(data){
         process.env.RCADDRESS = HOST[0];
         process.env.RCPORT = PORT;
         process.env.RCPATH = PATH;
+
+        console.log('RCADDRESS: ' + process.env.RCADDRESS);
+        console.log('RCPORT: ' + process.env.RCPORT);
+        console.log('RCPATH: ' + process.env.RCPATH);
+        
     }
+    
+    console.log(data.toString());
 
 });
