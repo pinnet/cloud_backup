@@ -9,14 +9,18 @@ http.createServer(onRequest).listen(80);
 function onRequest(client_req, client_res) {
   
  // console.log('serve: ' + client_req.url);
-
+  var pth = client_req.url;
   client_req.headers.host = "localhost";
   client_req.headers.authorization = auth;
   
+  if( process.env.RCPATH != undefined ){
+    pth = process.env.RCPATH;
+  }
+
   var options = {
     hostname: process.env.RCADDRESS,
     port: process.env.RCPORT,
-    path: client_req.url,
+    path: pth,
     method: client_req.method,
     headers: client_req.headers
   };
