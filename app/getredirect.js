@@ -1,5 +1,4 @@
 const fs = require('fs');
-require('log-timestamp');
 
 const buttonPressesLogFile = '/run/rclone.log';
 

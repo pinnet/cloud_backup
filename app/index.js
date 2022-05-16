@@ -8,7 +8,7 @@ http.createServer(onRequest).listen(80);
 
 function onRequest(client_req, client_res) {
   
-  console.log('serve: ' + client_req.url);
+ // console.log('serve: ' + client_req.url);
 
   client_req.headers.host = "localhost";
   client_req.headers.authorization = auth;
