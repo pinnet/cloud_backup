@@ -36,10 +36,10 @@ http.createServer(onRequest).listen(8080);
 
 function onRequest(client_req, client_res) {
    
-  var path     = client_req.url.toString();
-  console.log(path);
+  var path     = client_req.url;
+  console.log(path.toString());
 
-  
+
   client_req.headers.host = "localhost";
   client_req.headers.authorization = auth;
   
