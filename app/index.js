@@ -3,24 +3,24 @@ const { hostname } = require('os');
 
 var username = process.env.RCUSER;
 var password = process.env.RCPASS;
-var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
+//var auth = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
 
-http.createServer(onRequest).listen(80);
+http.createServer(onRequest).listen(53683);
 
 function onRequest(client_req, client_res) {
    
   var path     = client_req.url;
   
-  client_req.headers.host = "localhost";
-  client_req.headers.authorization = auth;
+  client_req.headers.host = "localhost:53682";
+  //client_req.headers.authorization = auth;
   
   if( process.env.RCPATH != undefined ){
       path = process.env.RCPATH;
   }
 
   var options = {
-    hostname: process.env.RCADDRESS,
-    port: process.env.RCPORT,
+    hostname: "127.0.0.1",
+    port: '53682',
     path: path,
     method: client_req.method,
     headers: client_req.headers
