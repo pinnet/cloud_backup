@@ -38,7 +38,8 @@ function onRequest(client_req, client_res) {
 
     if( process.env.RCPATH != undefined ){
         //redirect
-             client_res.writeHead(303, {  location: "http://localhost:53682/"+ process.env.RCPATH  });
+             console.log(process.env.RCPATH);
+             client_res.writeHead(301, {  location: "http://localhost:53682/" });
              client_res.end();
     }
     else{
