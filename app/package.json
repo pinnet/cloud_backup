@@ -1,0 +1,23 @@
+{
+  "name": "cloud_backup_server",
+  "version": "1.0.0",
+  "description": "http server for cloud backup",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pinnet/cloud_backup.git"
+  },
+  "author": "Danny Arnold",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pinnet/cloud_backup/issues"
+  },
+  "homepage": "https://github.com/pinnet/cloud_backup#readme",
+  "dependencies": {
+    
+  }
+}

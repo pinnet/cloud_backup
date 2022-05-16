@@ -1,0 +1,41 @@
+#!/bin/bash
+
+echo "Installing Dependencies --------------------------------------------------"
+apt-get update
+apt-get -y upgrade 
+apt-get -qq install -y --no-install-recommends npm
+apt-get -qq install -y --no-install-recommends openssh-server
+apt-get -qq install -y --no-install-recommends rclone
+apt-get -qq install -y git 
+
+
+
+echo "Setting up Repository -----------------------------------------------------"
+
+if [ -f /root/${REPO_DIR} ]; then
+    cd /root/${REPO_DIR}
+    if grep pull | grep -q "Already"; then
+            echo "Repository is already up to date"
+       else
+            rm -r /home/node/app
+            init_setup
+    fi
+else
+    cd /root
+    git clone ${REPO_URL}
+    init_setup
+fi
+
+echo "Starting sshd -------------------------------------------------------------"
+
+mkdir -p /run/sshd && chmod 755 /run/sshd
+/usr/sbin/sshd  &
+
+echo "Starting Rclone -----------------------------------------------------------"
+
+rclone rcd --rc-web-gui --rc-addr ${RCADDRESS}:${RCPORT} --rc-user ${RCUSER} --rc-pass ${RCPASS} &
+
+echo "Starting node server ---------------------------------------------------"
+
+cd /home/node/app/
+npm run deploy

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Executing install scripts -------------------------------------------------"
+chmod -R +x /root/${REPO_DIR}/install_scripts
+
+/root/${REPO_DIR}/install_scripts/mkuser.sh
+/root/${REPO_DIR}/install_scripts/mkjail.sh
+
+mkdir -p /home/node/app
+cp -r /root/${REPO_DIR}/app/ /home/node/
+cd /home/node/app/
+pwd 
+ls  -al
+npm install
+chown -R node:node /home/node/app
