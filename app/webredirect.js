@@ -57,7 +57,7 @@ function onRequest(client_req, client_res) {
   var proxy = http.request(options, function (res) {
 
     if( process.env.RCPATH != undefined ){
-        /   /redirect
+        //redirect
              client_res.writeHead(303, {  location: "https://google.com" });
              res.pipe(client_res, {
                 end: true });
