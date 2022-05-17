@@ -1,4 +1,5 @@
 var http = require('http');
+var path = require('path');
 const { hostname } = require('os');
 
 var username = process.env.RCUSER;
@@ -46,11 +47,7 @@ function onRequest(client_req, client_res) {
       };
 
      
-    if( process.env.RCPATH != undefined ){
-        
-        
-       
-       
+    if( process.env.RCPATH != undefined ){       
             //redirect
              console.log(process.env.RCPATH);
              client_res.writeHead(307, {  location: "http://127.0.0.1:8081/" });
@@ -58,16 +55,16 @@ function onRequest(client_req, client_res) {
              client_res.end();
     }
     else{
-        var path  = client_req.url;
+        var reqpath  = client_req.url;
 
-        console.log(path.toString());
+        console.log(reqpath.toString());
         //client_req.headers = headers;
         client_req.headers.host = "localhost";
         client_req.headers.authorization = auth;
         var options = {
             hostname: process.env.RCADDRESS,
             port: process.env.RCPORT,
-            path: path,
+            path: reqpath,
             method: client_req.method,
             headers: client_req.headers
         };
