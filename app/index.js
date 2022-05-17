@@ -10,8 +10,10 @@ http.createServer(onRequest).listen(8081);
 function onRequest(client_req, client_res) {
   
   const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
+    "Access-Control-Allow-Origin"  : "*",
+    "Access-Control-Allow-Methods" : "OPTIONS,GET, POST, PUT, DELETE",
+    "Access-Control-Allow-Headers" : "Authorization",
+    "Access-Control-Allow-Credentials": true,  
     "Access-Control-Max-Age": 2592000, // 30 days
     /** add other headers as per requirement */
   }; 
