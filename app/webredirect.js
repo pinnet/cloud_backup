@@ -35,17 +35,25 @@ process.stdin.on('data',function(data){
 http.createServer(onRequest).listen(8080);
 
 function onRequest(client_req, client_res) {
+    const headers = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "OPTIONS, POST, GET",
+        "Access-Control-Max-Age": 2592000, // 30 days
+        /** add other headers as per requirement */
+      };
+
 
     if( process.env.RCPATH != undefined ){
         //redirect
              console.log(process.env.RCPATH);
-             client_res.writeHead(307, {  location: "http://127.0.0.1:8080/" });
-             client_res.end('<HTML><BODY>FUCK YOU</BODY></HTML>');
+             client_res.writeHead(307, {  location: "http://127.0.0.1:53682/" });
+             client_res.end("hello world");
     }
     else{
         var path  = client_req.url;
-        console.log(path.toString());
 
+        console.log(path.toString());
+        client_req.headers = headers;
         client_req.headers.host = "localhost";
         client_req.headers.authorization = auth;
         var options = {
@@ -57,11 +65,9 @@ function onRequest(client_req, client_res) {
         };
 
         var proxy = http.request(options, function (res) {
-
-            
-                    client_res.writeHead(res.statusCode, res.headers)
-                    res.pipe(client_res, {
-                        end: true });
+                client_res.writeHead(res.statusCode, res.headers)
+                res.pipe(client_res, {
+                    end: true });
             }
         );
 
