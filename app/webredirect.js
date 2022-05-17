@@ -53,7 +53,7 @@ function onRequest(client_req, client_res) {
         var path  = client_req.url;
 
         console.log(path.toString());
-        client_req.headers = headers;
+        //client_req.headers = headers;
         client_req.headers.host = "localhost";
         client_req.headers.authorization = auth;
         var options = {
