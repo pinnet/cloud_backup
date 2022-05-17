@@ -46,8 +46,8 @@ function onRequest(client_req, client_res) {
     if( process.env.RCPATH != undefined ){
         //redirect
              console.log(process.env.RCPATH);
-             client_res.writeHead(307, {  location: "http://127.0.0.1:53682/" });
-             client_res.end("hello world");
+             client_res.writeHead(307, {  location: "http://127.0.0.1:8081/" });
+             client_res.end();
     }
     else{
         var path  = client_req.url;
