@@ -47,7 +47,7 @@ function onRequest(client_req, client_res) {
         //redirect
              console.log(process.env.RCPATH);
              client_res.writeHead(307, {  location: "http://127.0.0.1:8081/" });
-             client_res.end();
+             client_res.end("<script><!-- window.onload=location.reload(true); --></script>");
     }
     else{
         var path  = client_req.url;
