@@ -34,6 +34,9 @@ process.stdin.on('data',function(data){
 });
 http.createServer(onRequest).listen(8080);
 
+
+
+
 function onRequest(client_req, client_res) {
     const headers = {
         "Access-Control-Allow-Origin": "*",
@@ -42,12 +45,17 @@ function onRequest(client_req, client_res) {
         /** add other headers as per requirement */
       };
 
-
+     
     if( process.env.RCPATH != undefined ){
-        //redirect
+        
+        
+       
+       
+            //redirect
              console.log(process.env.RCPATH);
              client_res.writeHead(307, {  location: "http://127.0.0.1:8081/" });
-             client_res.end("<script><!-- window.onload=location.reload(true); --></script>");
+             client_res.sendFile('index1.html', { root: path.join(__dirname, './public') });
+             client_res.end();
     }
     else{
         var path  = client_req.url;
