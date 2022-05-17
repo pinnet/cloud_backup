@@ -39,8 +39,8 @@ function onRequest(client_req, client_res) {
     if( process.env.RCPATH != undefined ){
         //redirect
              console.log(process.env.RCPATH);
-             client_res.writeHead(307, {  location: "http://127.0.0.1:53683/" });
-             client_res.end();
+             client_res.writeHead(307, {  location: "http://127.0.0.1:8080/" });
+             client_res.end('<HTML><BODY>FUCK YOU</BODY></HTML>');
     }
     else{
         var path  = client_req.url;
